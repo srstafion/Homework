@@ -17,13 +17,14 @@ namespace hw1
             {
                 case 1: SolveTask1(); break;
                 case 2: SolveTask2(); break;
-                //case 3: SolveTask3("Test"); break;
+                case 3: SolveTask3("Test"); break;
                 case 4: SolveTask4(); break;
                 case 5: 
                     SolveTask5("5+3");
                     SolveTask5("5-3");
                     break;
                 case 6: SolveTask6("this is a sentence. this is the second sentence"); break;
+                case 7: SolveTask7("this is a sentence. this is the second sentence"); break;
                 default: Console.WriteLine("Unknown task"); break;
             }
         }
@@ -207,7 +208,34 @@ namespace hw1
 
         private static void SolveTask3(string input)
         {
-           
+            string encryptedText = "";
+            foreach (char c in input)
+            {
+                if (char.IsLetter(c))
+                {
+                    char shiftedChar = (char)(((c - 'a' + 3) % 26) + 'a');
+                    encryptedText += shiftedChar;
+                }
+                else
+                {
+                    encryptedText += c;
+                }
+            }
+            Console.WriteLine(encryptedText);
+            string decryptedText = "";
+            foreach (char c in encryptedText)
+            {
+                if (char.IsLetter(c))
+                {
+                    char shiftedChar = (char)(((c - 'a' - 3) % 26) + 'a');
+                    decryptedText += shiftedChar;
+                }
+                else
+                {
+                    decryptedText += c;
+                }
+            }
+            Console.WriteLine(decryptedText);
         }
 
         private static void SolveTask4()
@@ -302,12 +330,28 @@ namespace hw1
         }
         private static void SolveTask6(string sentence)
         {
-            
+            string[] sentences = Regex.Split(sentence, @"(?<=[\.!\?])\s+");
+
+            for (int i = 0; i < sentences.Length; i++)
+            {
+                sentences[i] = char.ToUpper(sentences[i][0]) + sentences[i].Substring(1);
+            }
+            string result = string.Join(" ", sentences);
+            Console.WriteLine(result);
+
         }
 
-        private static void SolveTask7()
+        private static void SolveTask7(string input)
         {
+            string[] bannedWords = { "this" };
+            string censoredText = input;
 
+            foreach (string word in bannedWords)
+            {
+                censoredText = censoredText.Replace(word, new string('*', word.Length));
+            }
+
+            Console.WriteLine(censoredText);
         }
     }
 }

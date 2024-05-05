@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Denis pipis\\source\\repos\\hw1\\hw1.csproj": {}
+    "C:\\Users\\Denis pipis\\Desktop\\Homework\\hw1\\hw1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Denis pipis\\source\\repos\\hw1\\hw1.csproj": {
+    "C:\\Users\\Denis pipis\\Desktop\\Homework\\hw1\\hw1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Denis pipis\\source\\repos\\hw1\\hw1.csproj",
+        "projectUniqueName": "C:\\Users\\Denis pipis\\Desktop\\Homework\\hw1\\hw1.csproj",
         "projectName": "hw1",
-        "projectPath": "C:\\Users\\Denis pipis\\source\\repos\\hw1\\hw1.csproj",
+        "projectPath": "C:\\Users\\Denis pipis\\Desktop\\Homework\\hw1\\hw1.csproj",
         "packagesPath": "C:\\Users\\Denis pipis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Denis pipis\\source\\repos\\hw1\\obj\\",
+        "outputPath": "C:\\Users\\Denis pipis\\Desktop\\Homework\\hw1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Denis pipis\\AppData\\Roaming\\NuGet\\NuGet.Config",
