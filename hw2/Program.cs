@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace hw1
+namespace hw2
 {
     internal class Program
     {
@@ -18,11 +18,8 @@ namespace hw1
             int taskNumber = int.Parse(Console.ReadLine());
             switch (taskNumber)
             {
-                case 1: SolveTask1(5, '#'); break;
-                case 2: 
-                    SolveTask2(1234);
-                    SolveTask2(1221);
-                    break;
+                case 1: SolveTask1(); break;
+                case 2: SolveTask2(); break;
                 case 3: SolveTask3(array1, array2); break;
                 case 4: SolveTask4(); break;
                 case 5: SolveTask5(); break;
@@ -30,7 +27,17 @@ namespace hw1
                 default: Console.WriteLine("Unknown task"); break;
             }
         }
-        private static void SolveTask1(int size, char symbol)
+        private static void SolveTask1()
+        {
+            Console.Write("Enter size: ");
+            int size = int.Parse(Console.ReadLine());
+            Console.Write("Enter symbol: ");
+            char symbol = char.Parse(Console.ReadLine());
+
+            PrintSquare(size, symbol);
+        }
+
+        private static void PrintSquare(int size, char symbol)
         {
             for (int i = 0; i < size; i++)
             {
@@ -42,19 +49,35 @@ namespace hw1
             }
         }
 
-        private static void SolveTask2(int number)
+        private static void SolveTask2()
+        {
+            Console.Write("Enter number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            bool isPalindrome = CheckPalindrome(number);
+            Console.WriteLine(isPalindrome);
+        }
+
+        private static bool CheckPalindrome(int number)
         {
             string numString = number.ToString();
             int rightIndex = numString.Length - 1;
 
             for (int i = 0; i < numString.Length / 2; i++)
             {
-                Console.WriteLine(numString[i] != numString[rightIndex - i]);
-                break;
+                if (numString[i] != numString[rightIndex - i])
+                    return false;
             }
+            return true;
         }
 
         private static void SolveTask3(int[] array1, int[] array2)
+        {
+            int[] resultArray = RemoveCommonElements(array1, array2);
+            PrintIntArray(resultArray);
+        }
+
+        private static int[] RemoveCommonElements(int[] array1, int[] array2)
         {
             int count = 0;
             for (int i = 0; i < array1.Length; i++)
@@ -78,81 +101,46 @@ namespace hw1
                 if (array1[i] != 0) newArr[count++] = array1[i];
             }
 
-            foreach (int num in newArr)
+            return newArr;
+        }
+
+        private static void PrintIntArray(int[] array)
+        {
+            foreach (int num in array)
             {
                 Console.Write(num + " ");
             }
             Console.WriteLine();
         }
 
-        class Website
+    class Website
         {
-            private string name;
-            private string url;
-            private string description;
-            private string ip;
-
-            public void SetName(string name)
-            {
-                this.name = name;
-            }
-
-            public string GetName()
-            {
-                return name;
-            }
-
-            public void SetUrl(string url)
-            {
-                this.url = url;
-            }
-
-            public string GetUrl()
-            {
-                return url;
-            }
-
-            public void SetDescription(string description)
-            {
-                this.description = description;
-            }
-
-            public string GetDescription()
-            {
-                return description;
-            }
-
-            public void SetIp(string ipAddress)
-            {
-                this.ip = ipAddress;
-            }
-
-            public string GetIp()
-            {
-                return ip;
-            }
+            public string Name { get; set; }
+            public string Url { get; set; }
+            public string Description { get; set; }
+            public string Ip { get; set; }
 
             public void EnterData()
             {
                 Console.Write("Set Site Name: ");
-                name = Console.ReadLine();
+                Name = Console.ReadLine();
 
                 Console.Write("Set Url: ");
-                url = Console.ReadLine();
+                Url = Console.ReadLine();
 
                 Console.Write("Set Description: ");
-                description = Console.ReadLine();
+                Description = Console.ReadLine();
 
                 Console.Write("Set IP: ");
-                ip = Console.ReadLine();
+                Ip = Console.ReadLine();
             }
 
             public void DisplayData()
             {
-                Console.WriteLine("Site Name: " + name);
-                Console.WriteLine("URL: " + url);
-                Console.WriteLine("Descripyion: " + description);
-                Console.WriteLine("IP: " + ip);
+                Console.WriteLine("Site Name: " + Name);
+                Console.WriteLine("URL: " + Url);
+                Console.WriteLine("Description: " + Description);
+                Console.WriteLine("IP: " + Ip);
             }
         }
 
@@ -166,87 +154,37 @@ namespace hw1
 
         class Magazine
         {
-            private string name;
-            private string releaseYear;
-            private string description;
-            private string phone;
-            private string email;
-
-            public void SetName(string name)
-            {
-                this.name = name;
-            }
-
-            public string GetName()
-            {
-                return name;
-            }
-
-            public void SetYear(string year)
-            {
-                this.releaseYear = year;
-            }
-
-            public string GetYear()
-            {
-                return releaseYear;
-            }
-
-            public void SetDescription(string description)
-            {
-                this.description = description;
-            }
-
-            public string GetDescription()
-            {
-                return description;
-            }
-
-            public void SetPhone(string phone)
-            {
-                this.phone = phone;
-            }
-
-            public string GetPhone()
-            {
-                return phone;
-            }
-
-            public void SetEmail(string email)
-            {
-                this.email = email;
-            }
-
-            public string GetEmail()
-            {
-                return email;
-            }
+            public string Name { get; set; }
+            public string ReleaseYear { get; set; }
+            public string Description { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
 
             public void EnterData()
             {
                 Console.Write("Set Magazine Name: ");
-                name = Console.ReadLine();
+                Name = Console.ReadLine();
 
                 Console.Write("Set Release Year: ");
-                releaseYear = Console.ReadLine();
+                ReleaseYear = Console.ReadLine();
 
                 Console.Write("Set Description: ");
-                description = Console.ReadLine();
+                Description = Console.ReadLine();
 
                 Console.Write("Set Phone Number: ");
-                phone = Console.ReadLine();
+                Phone = Console.ReadLine();
 
                 Console.Write("Set Email: ");
-                email = Console.ReadLine();
+                Email = Console.ReadLine();
             }
 
             public void DisplayData()
             {
-                Console.WriteLine("Site Name: " + name);
-                Console.WriteLine("Release Year: " + releaseYear);
-                Console.WriteLine("Descripyion: " + description);
-                Console.WriteLine("Phone: " + phone);
-                Console.WriteLine("Email: " + email);
+                Console.WriteLine("Magazine Name: " + Name);
+                Console.WriteLine("Release Year: " + ReleaseYear);
+                Console.WriteLine("Description: " + Description);
+                Console.WriteLine("Phone: " + Phone);
+                Console.WriteLine("Email: " + Email);
             }
         }
 
@@ -260,87 +198,37 @@ namespace hw1
 
         class Shop
         {
-            private string name;
-            private string adress;
-            private string description;
-            private string phone;
-            private string email;
-
-            public void SetName(string name)
-            {
-                this.name = name;
-            }
-
-            public string GetName()
-            {
-                return name;
-            }
-
-            public void SetAdress(string adress)
-            {
-                this.adress = adress;
-            }
-
-            public string GetAdress()
-            {
-                return adress;
-            }
-
-            public void SetDescription(string description)
-            {
-                this.description = description;
-            }
-
-            public string GetDescription()
-            {
-                return description;
-            }
-
-            public void SetPhone(string phone)
-            {
-                this.phone = phone;
-            }
-
-            public string GetPhone()
-            {
-                return phone;
-            }
-
-            public void SetEmail(string email)
-            {
-                this.email = email;
-            }
-
-            public string GetEmail()
-            {
-                return email;
-            }
+            public string Name { get; set; }
+            public string Address { get; set; }
+            public string Description { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
 
             public void EnterData()
             {
-                Console.Write("Set Magazine Name: ");
-                name = Console.ReadLine();
+                Console.Write("Set Shop Name: ");
+                Name = Console.ReadLine();
 
-                Console.Write("Set Adress: ");
-                adress = Console.ReadLine();
+                Console.Write("Set Address: ");
+                Address = Console.ReadLine();
 
                 Console.Write("Set Description: ");
-                description = Console.ReadLine();
+                Description = Console.ReadLine();
 
                 Console.Write("Set Phone Number: ");
-                phone = Console.ReadLine();
+                Phone = Console.ReadLine();
 
                 Console.Write("Set Email: ");
-                email = Console.ReadLine();
+                Email = Console.ReadLine();
             }
 
             public void DisplayData()
             {
-                Console.WriteLine("Site Name: " + name);
-                Console.WriteLine("Adress: " + adress);
-                Console.WriteLine("Descripyion: " + description);
-                Console.WriteLine("Phone: " + phone);
-                Console.WriteLine("Email: " + email);
+                Console.WriteLine("Shop Name: " + Name);
+                Console.WriteLine("Address: " + Address);
+                Console.WriteLine("Description: " + Description);
+                Console.WriteLine("Phone: " + Phone);
+                Console.WriteLine("Email: " + Email);
             }
         }
 

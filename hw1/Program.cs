@@ -32,116 +32,180 @@ namespace hw1
         {
             int[] A = new int[5];
             int[,] B = new int[3, 4];
-            Console.WriteLine("Input 5 numbers for array A:");
-            for (int i = 0; i < A.Length; i++)
-            {
-                A[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            Console.WriteLine("Array A:");
-            for (int i = 0; i < A.Length; i++)
-            {
-                Console.Write($"{A[i]} ");
-            }
-            Console.WriteLine();
-
-            Random rnd = new Random();
-            Console.WriteLine("Array B:");
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    B[i, j] = rnd.Next(100);
-                    Console.Write($"{B[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-
-            int maxA = A[0];
-            for (int i = 0; i < A.Length; i++)
-            {
-                if (A[i] > maxA) maxA = A[i];
-            }
-
-            int maxB = B[0, 0];
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (B[i, j] > maxB) maxB = B[i, j];
-                }
-            }
+            InputArray(A);
+            InputArray(B);
+            int maxA = FindMax(A);
+            int maxB = FindMax(B);
+            int minA = FindMin(A);
+            int minB = FindMin(B);
+            int sum = SumArray(A) + SumArray(B);
+            double multiplied = MultiplyArray(A) * MultiplyArray(B);
+            int sumEvenA = SumEven(A);
+            int sumOddB = SumOdd(B);
             Console.WriteLine($"Max Number: {maxA} {maxB}");
-
-            int minA = A[0];
-            for (int i = 0; i < A.Length; i++)
-            {
-                if (A[i] < minA) minA = A[i];
-            }
-
-            int minB = B[0, 0];
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (B[i, j] < minB) minB = B[i, j];
-                }
-            }
             Console.WriteLine($"Min Number: {minA} {minB}");
-
-            int sum = 0;
-            for (int i = 0; i < A.Length; i++)
-            {
-                sum += A[i];
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    sum += B[i, j];
-                }
-            }
             Console.WriteLine($"Sum: {sum}");
-
-            double multiplied = 1;
-            for (int i = 0; i < A.Length; i++)
-            {
-                multiplied *= A[i];
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    multiplied *= B[i, j];
-                }
-            }
             Console.WriteLine($"Multiplied: {multiplied}");
-
-            int sumEvenA = 0;
-            for (int i = 0; i < A.Length; i++)
-            {
-                if (A[i] % 2 == 0)
-                    sumEvenA += A[i];
-            }
             Console.WriteLine($"Even Sum: {sumEvenA}");
-
-            int sumOddB = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    if (B[i, j] % 2 != 0)
-                    {
-                        sumOddB += B[i, j];
-                    }
-                }
-            }
             Console.WriteLine($"Obb B Sum: {sumOddB}");
             Console.ReadLine();
         }
 
+        private static void InputArray(int[] array)
+        {
+            Console.WriteLine($"Input {array.Length} numbers:");
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+
+        private static void InputArray(int[,] array)
+        {
+            Random rnd = new Random();
+            Console.WriteLine("Array:");
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    array[i, j] = rnd.Next(100);
+                    Console.Write($"{array[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static int FindMax(int[] array)
+        {
+            int max = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] > max)
+                    max = array[i];
+            }
+            return max;
+        }
+
+        private static int FindMax(int[,] array)
+        {
+            int max = array[0, 0];
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] > max)
+                        max = array[i, j];
+                }
+            }
+            return max;
+        }
+
+        private static int FindMin(int[] array)
+        {
+            int min = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] < min)
+                    min = array[i];
+            }
+            return min;
+        }
+
+        private static int FindMin(int[,] array)
+        {
+            int min = array[0, 0];
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] < min)
+                        min = array[i, j];
+                }
+            }
+            return min;
+        }
+
+        private static int SumArray(int[] array)
+        {
+            int sum = 0;
+            foreach (int num in array)
+            {
+                sum += num;
+            }
+            return sum;
+        }
+
+        private static int SumArray(int[,] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    sum += array[i, j];
+                }
+            }
+            return sum;
+        }
+
+        private static double MultiplyArray(int[] array)
+        {
+            double result = 1;
+            foreach (int num in array)
+            {
+                result *= num;
+            }
+            return result;
+        }
+
+        private static double MultiplyArray(int[,] array)
+        {
+            double result = 1;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    result *= array[i, j];
+                }
+            }
+            return result;
+        }
+
+        private static int SumEven(int[] array)
+        {
+            int sum = 0;
+            foreach (int num in array)
+            {
+                if (num % 2 == 0)
+                    sum += num;
+            }
+            return sum;
+        }
+
+        private static int SumOdd(int[,] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] % 2 != 0)
+                        sum += array[i, j];
+                }
+            }
+            return sum;
+        }
+
         private static void SolveTask2()
+        {
+            int[,] array = GenerateArray();
+            int sum = CalculateSubMatrixSum(array);
+            PrintArray(array);
+            Console.WriteLine($"Sum: {sum}");
+            Console.ReadLine();
+        }
+
+        private static int[,] GenerateArray()
         {
             int[,] array = new int[5, 5];
             Random rnd = new Random();
@@ -154,6 +218,11 @@ namespace hw1
                 }
             }
 
+            return array;
+        }
+
+        private static int CalculateSubMatrixSum(int[,] array)
+        {
             int minElement = array[0, 0];
             int maxElement = array[0, 0];
             int minRow = 0, minColumn = 0;
@@ -179,10 +248,10 @@ namespace hw1
                 }
             }
 
-            int startRow = minRow < maxRow ? minRow : maxRow;
-            int endRow = minRow > maxRow ? minRow : maxRow;
-            int startColumn = minColumn < maxColumn ? minColumn : maxColumn;
-            int endColumn = minColumn > maxColumn ? minColumn : maxColumn;
+            int startRow = Math.Min(minRow, maxRow);
+            int endRow = Math.Max(minRow, maxRow);
+            int startColumn = Math.Min(minColumn, maxColumn);
+            int endColumn = Math.Max(minColumn, maxColumn);
 
             int sum = 0;
             for (int i = startRow; i <= endRow; i++)
@@ -193,6 +262,11 @@ namespace hw1
                 }
             }
 
+            return sum;
+        }
+
+        private static void PrintArray(int[,] array)
+        {
             Console.WriteLine("Array:");
             for (int i = 0; i < 5; i++)
             {
@@ -202,11 +276,17 @@ namespace hw1
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine($"Sum: {sum}");
-            Console.ReadLine();
         }
 
         private static void SolveTask3(string input)
+        {
+            string encryptedText = Encrypt(input);
+            Console.WriteLine(encryptedText);
+            string decryptedText = Decrypt(encryptedText);
+            Console.WriteLine(decryptedText);
+        }
+
+        private static string Encrypt(string input)
         {
             string encryptedText = "";
             foreach (char c in input)
@@ -221,9 +301,13 @@ namespace hw1
                     encryptedText += c;
                 }
             }
-            Console.WriteLine(encryptedText);
+            return encryptedText;
+        }
+
+        private static string Decrypt(string input)
+        {
             string decryptedText = "";
-            foreach (char c in encryptedText)
+            foreach (char c in input)
             {
                 if (char.IsLetter(c))
                 {
@@ -235,13 +319,22 @@ namespace hw1
                     decryptedText += c;
                 }
             }
-            Console.WriteLine(decryptedText);
+            return decryptedText;
         }
 
         private static void SolveTask4()
         {
+            int[,] array = GenerateRandomArray();
+            PrintArray(array);
+            int operation = ChooseOperation();
+            PerformOperation(array, operation);
+        }
+
+        private static int[,] GenerateRandomArray()
+        {
             Random rnd = new Random();
             int[,] array = new int[2, 4];
+            Console.WriteLine("Array:");
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -251,59 +344,75 @@ namespace hw1
                 }
                 Console.WriteLine();
             }
+            return array;
+        }
+
+        private static int ChooseOperation()
+        {
             Console.WriteLine("Choose Operation:");
             Console.WriteLine("1 Multiply by Number");
             Console.WriteLine("2 Add");
             Console.WriteLine("3 Multiply");
-            int taskNumber = int.Parse(Console.ReadLine());
+            return int.Parse(Console.ReadLine());
+        }
 
-            switch (taskNumber)
+        private static void PerformOperation(int[,] array, int operation)
+        {
+            switch (operation)
             {
                 case 1:
-                    Console.WriteLine("Pick a Number:");
-                    int num = Convert.ToInt32(Console.ReadLine());
-                    int[,] result = new int[2, 4];
-                    for (int i = 0; i < 2; i++)
-                    {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            result[i, j] = array[i, j] * num;
-                        }
-                    }
-                    for (int i = 0; i < 2; i++)
-                    {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            Console.Write($"{result[i, j]} ");
-                        }
-                        Console.WriteLine();
-                    }
+                    MultiplyByNumber(array);
                     break;
                 case 2:
-                    int[] result2 = new int[4];
-                    for (int j = 0; j < 4; j++)
-                    {
-                        result2[j] = array[0, j] + array[1, j];
-                    }
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Console.Write($"{result2[i]} ");
-                    }
+                    AddArrays(array);
                     break;
                 case 3:
-                    int[] result3 = new int[4];
-                    for (int j = 0; j < 4; j++)
-                    {
-                        result3[j] = array[0, j] * array[1, j];
-                    }
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Console.Write($"{result3[i]} ");
-                    }
+                    MultiplyArrays(array);
                     break;
                 default:
                     Console.WriteLine("Invalid Operation");
                     break;
+            }
+        }
+
+        private static void MultiplyByNumber(int[,] array)
+        {
+            Console.WriteLine("Pick a Number:");
+            int num = Convert.ToInt32(Console.ReadLine());
+            int[,] result = new int[2, 4];
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    result[i, j] = array[i, j] * num;
+                }
+            }
+            PrintArray(result);
+        }
+
+        private static void AddArrays(int[,] array)
+        {
+            int[] result = new int[4];
+            for (int j = 0; j < 4; j++)
+            {
+                result[j] = array[0, j] + array[1, j];
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write($"{result[i]} ");
+            }
+        }
+
+        private static void MultiplyArrays(int[,] array)
+        {
+            int[] result = new int[4];
+            for (int j = 0; j < 4; j++)
+            {
+                result[j] = array[0, j] * array[1, j];
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write($"{result[i]} ");
             }
         }
 
@@ -328,6 +437,7 @@ namespace hw1
             }
             Console.WriteLine(result);
         }
+
         private static void SolveTask6(string sentence)
         {
             string[] sentences = Regex.Split(sentence, @"(?<=[\.!\?])\s+");
@@ -338,7 +448,6 @@ namespace hw1
             }
             string result = string.Join(" ", sentences);
             Console.WriteLine(result);
-
         }
 
         private static void SolveTask7(string input)
